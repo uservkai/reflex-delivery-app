@@ -1,1 +1,0 @@
-{"root":["./src/App.tsx","./src/main.tsx","./src/components/DeliveryCard.tsx","./src/components/Layout.tsx","./src/components/QrScanner.tsx","./src/components/StatusBadge.tsx","./src/lib/supabase.ts","./src/lib/types.ts","./src/pages/DispatcherPage.tsx","./src/pages/LoginPage.tsx","./src/pages/RetailerPage.tsx","./src/pages/RiderPage.tsx"],"errors":true,"version":"5.8.3"}
