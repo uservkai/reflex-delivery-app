@@ -1,7 +1,6 @@
 import { FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
-import type { Role } from '../lib/types'
 import { SiteFooter } from '../components/Layout'
 
 type DemoAccountKey = 'retailer' | 'dispatcher' | 'rider' | 'rider2'
@@ -45,7 +44,6 @@ export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [fullName, setFullName] = useState('')
-  const [role, setRole] = useState<Role>('retailer')
   const [message, setMessage] = useState('')
   const [busy, setBusy] = useState(false)
   const [demoAccount, setDemoAccount] = useState<DemoAccountKey>('retailer')
@@ -63,7 +61,7 @@ export default function LoginPage() {
       const { error } = await supabase.auth.signUp({
         email,
         password,
-        options: { data: { full_name: fullName, role } },
+        options: { data: { full_name: fullName, role: 'retailer' } },
       })
       if (error) setMessage(error.message)
       else setMessage('Account created. If email confirmation is enabled in Supabase, confirm your email, then sign in.')
@@ -151,7 +149,7 @@ export default function LoginPage() {
                 <label>Email<input required type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" /></label>
                 <label>Password<input required minLength={6} type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="At least 6 characters" /></label>
               </div>
-              {mode === 'signup' && <label>Role<select value={role} onChange={e => setRole(e.target.value as Role)}><option value="retailer">Retailer</option><option value="dispatcher">Dispatcher</option><option value="rider">Rider</option></select></label>}
+              {mode === 'signup' && <label>Account type<input value="Retailer" disabled /></label>}
               {message && <div className="notice">{message}</div>}
               <button className="button primary auth-submit" disabled={busy || demoBusy}>{busy ? 'Working…' : mode === 'signin' ? 'Sign in' : 'Create account'}</button>
             </form>
